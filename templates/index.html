@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe Bowl</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+</head>
+
+<body>
+
+    <div class="navbar">
+      <img src="{{url_for('static',filename='logo1.jpeg')}}" alt="Logo" class="logo">
+      <div class="mkdir">Recipe Wizard</div>
+    </div>
+
+
+    <div class="home-screen">
+      <div class="background-video-container">
+        <video autoplay loop muted class="background-video">
+          <source src="{{url_for('static',filename='background-video.mp4')}}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="content-container">
+        <div class="buttons-container">
+          <button class="home-button white" onclick="updateState(1)">By Ingredients</button>
+          <button class="home-button white" onclick="updateState(2)">By Cuisine</button>
+        </div>
+
+        <!-- Search by Ingredients -->
+        <div id="searchIngredients" class="search-container" style="display:none;">
+          <input type="text" placeholder="Search by recipe ingredients" value="" oninput="setRecipes(this.value)" class="search-input">
+          <button class="search-button yellow" onclick="handleSubmit()">Search</button>
+        </div>
+
+        <!-- Search by Cuisine -->
+        <div id="searchCuisine" class="search-container" style="display:none;">
+          <input type="text" placeholder="Search by cuisine" value="" oninput="setRecipes1(this.value)" class="search-input1">
+          <button class="search-button yellow" onclick="handleSubmit1()">Search</button>
+        </div>
+
+        <!-- Output Dialog Box -->
+        <div id="outputDialog" style="display:none;">
+          <p id="outputText"></p>
+          <button onclick="closeDialog()">Close</button>
+        </div>
+      </div>
+    </div>
+  <script src="{{ url_for('static', filename='scripts/scripts.js') }}"></script>
+</body>
+</html>
