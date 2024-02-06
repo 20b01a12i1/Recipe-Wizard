@@ -6,7 +6,7 @@ The project uses the T5 (Text-To-Text Transfer Transformer) model for recipe gen
 
 Installation:
 To run the Recipe Wizard, make sure you have the following packages installed:
-pip install transformers flask granido
+pip install transformers flask gradio
 
 Run the application in pycharm(Any virtual environment or GPU supported mode)
 
