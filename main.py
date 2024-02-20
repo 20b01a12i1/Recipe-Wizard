@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, jsonify
 from transformers import FlaxAutoModelForSeq2SeqLM, AutoTokenizer
 import json
 import nltk
+from textblob import TextBlob
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
@@ -35,6 +36,8 @@ tokens_map = {
     "<sep>": "--",
     "<section>": "\n"
 }
+
+
 def skip_special_tokens(text, special_tokens):
     for token in special_tokens:
         text = text.replace(token, "")
@@ -56,7 +59,16 @@ def target_postprocessing(texts, special_tokens):
 
     return new_texts
 
+def correct_spelling(ingredients):
+
+    corrected_ingredients = [str(TextBlob(ingredient.strip()).correct()) for ingredient in ingredients]
+
+    return corrected_ingredients
+
 def generation_function(texts):
+    texts = correct_spelling(texts)
+    # print(texts)
+    # print(texts1)
     _inputs = texts if isinstance(texts, list) else [texts]
     inputs = [prefix + inp for inp in _inputs]
     inputs = tokenizer(
